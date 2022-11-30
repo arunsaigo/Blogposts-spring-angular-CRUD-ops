@@ -1,0 +1,228 @@
+<!--<div class="container-fluid">
+    <nav class="navbar navbar-dark bg-dark">
+    <img src="assets\images\logo\logo.jpg" class="nav-brand" width="10%" height="50px"/>
+    <div class="position-absolute">
+    <ul class="nav-bar nav" style="margin-left:160px">
+    <li class="nav-item" ><a href="#" class="nav-link"style="color:white">Home</a></li>
+    </ul>
+    </div>
+    
+    
+    <div>
+    <ul class="nav navbar-right">
+    <li class="nav-item"><a href="#" class="nav-link" style=" color:white" data-bs-toggle="modal" data-bs-target="#modalexx">Log In</a></li>
+    <li class="nav-item" ><a href="#" class="nav-link"style="color:white" data-bs-toggle="modal" data-bs-target="#modalex">Sign Up</a></li>
+    <li class="nav-item" ><a href="#" class="nav-link"style="color:white">About Us</a></li>
+    </ul>
+    </div>
+    </nav>
+    
+    <div class="carousel slide" data-bs-ride="carousel" id="carouselEX">
+      <div class="carousel-inner">
+      <div class="carousel-item active">
+      <p><img src="assets\images\carouselimgs\1.jpg" width="100%" height="20%"/></p>
+      </div>
+      <div class="carousel-item">
+      <p><img src="assets\images\carouselimgs\2.jpg" width="100%" height="20%"/></p>
+      </div>
+      <div class="carousel-item">
+      <p><img src="assets\images\carouselimgs\3.jpg" width="100%" height="20%"/></p>
+      </div>
+      </div>
+      <button type="button" class="carousel-control-prev" data-bs-target="#carouselEX" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+      </button>
+      <button type="button" class="carousel-control-next" data-bs-target="#carouselEX" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+       <span class="visually-hidden">next</span>
+      </button>
+       <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselEX" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselEX" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselEX" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+      </div>
+      <div  id="modalexx"class="modal">
+        <div class="modal-dialog" >
+        <div class="modal-content">
+        <div class="modal-header" style="color:rgb(70, 70, 181)"><h1>Log In</h1></div>
+        <div class="modal-body" style="background-color:rgb(0, 0, 0)">
+          <form #loginForm="ngForm" (ngSubmit)="validate()">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Email Id</label>
+                <div class="col-sm-9">
+                      <input type="text" name="emailid" [(ngModel)]="Mailid" required>
+                </div>
+             </div>
+             <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                      <input type="password" name="password" [(ngModel)]="Password" required>
+                </div>
+             </div>
+          
+        
+          
+        <div class="form-group row">
+           <div class="col-sm-2"><button type="submit" class="btn btn-info">Submit</button></div>
+          
+           
+           </div>
+        
+        
+           </form> </div></div></div></div>
+           <div  id="modalex"class="modal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header" style="color:blue"><h1>Sign Up</h1></div>
+            <div class="modal-body" style="background-color:yellow">
+              <form #signupForm="ngForm" (ngSubmit)="adduser()">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Name</label>
+                    <div class="col-sm-9">
+                          <input type="text" name="name" required [(ngModel)]="newuser.name">
+                    </div>
+                 </div>
+                 <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" >Gender</label>
+            
+                    <div class="col-sm-9" [(ngModel)]="newuser.gender">
+                      <input type="radio" name="gender" value="male" [(ngModel)]="newuser.gender"> Male
+                      <input type="radio" name="gender" value="female" [(ngModel)]="newuser.gender"> Female
+                      <input type="radio" name="gender" value="others" [(ngModel)]="newuser.gender"> Others
+                    </div>
+                 </div>
+                 <div class="form-group row" >
+                    <label class="col-sm-3 col-form-label">Email Id</label>
+                    <div class="col-sm-9">
+                          <input type="text" name="mail" [(ngModel)]="newuser.mailid" required>
+                    </div>
+                 </div>
+            
+                 
+            
+                 <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" >Password</label>
+                    <div class="col-sm-9">
+                          <input type="password" name="psd" [(ngModel)]="newuser.password" required>
+                    </div>
+                 </div>
+            
+                 <div class="form-group row">
+                    <label class="col-sm-3 col-form-label"  >Phonenumber</label>
+                    <div class="col-sm-9">
+                          <input type="text" name="number" [(ngModel)]="newuser.phonenumber" required>
+                    </div>
+                 </div>
+                
+            
+              
+            <div class="form-group row">
+               <div class="col-sm-2"><button type="submit" class="btn btn-info">Submit</button></div>
+               <div class="col-sm-2"><button type="reset" class="btn btn-info">Reset</button></div>
+               
+               </div>
+             
+            
+               </form> </div></div></div></div>  -->
+
+
+               <div class="container-fluid">
+                <nav class="navbar navbar-dark bg-dark">
+                <img src="assets\images\logo\logo.jpg" class="nav-brand" width="10%" height="50px"/>
+                <div class="position-absolute">
+                <ul class="nav-bar nav" style="margin-left:160px">
+                <li class="nav-item" ><a href="#" class="nav-link"style="color:white">Home</a></li>
+                </ul>
+                </div>
+                
+                
+                <div>
+                <ul class="nav navbar-right">
+                <li class="nav-item"><a href="#" class="nav-link" style=" color:white" data-bs-toggle="modal" data-bs-target="#modalexx">Log In</a></li>
+                <li class="nav-item" ><a href="#" class="nav-link"style="color:white" data-bs-toggle="modal" data-bs-target="#modalex">Sign Up</a></li>
+                <li class="nav-item" ><a href="#" class="nav-link"style="color:white">About Us</a></li>
+                </ul>
+                </div>
+                </nav>
+                
+                <div class="carousel slide" data-bs-ride="carousel" id="carouselEX">
+                  <div class="carousel-inner">
+                  <div class="carousel-item active">
+                  <p><img src="assets\images\carouselimgs\1.jpg" width="100%" height="20%"/></p>
+                  </div>
+                  <div class="carousel-item">
+                  <p><img src="assets\images\carouselimgs\3.jpg" width="100%" height="20%"/></p>
+                  </div>
+                  <div class="carousel-item">
+                  <p><img src="assets\images\carouselimgs\2.jpg" width="100%" height="20%"/></p>
+                  </div>
+                  </div>
+                  <button type="button" class="carousel-control-prev" data-bs-target="#carouselEX" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button type="button" class="carousel-control-next" data-bs-target="#carouselEX" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                   <span class="visually-hidden">next</span>
+                  </button>
+                   <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselEX" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselEX" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselEX" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                  </div>
+                  <div  id="modalexx"class="modal">
+                    <div class="modal-dialog" >
+                    <div class="modal-content">
+                    <div class="modal-header" style="color:blue"><h1>Log In</h1></div>
+                    <div class="modal-body">
+                     
+                       <div class="form">
+                
+                         <form #loginForm="ngForm" (ngSubmit)="validate()" >
+                           
+                           <input type="text" placeholder="&#xf007;  username" name="emailid" [(ngModel)]="Mailid">
+                           <input type="password"  placeholder="&#xf023;  password" name="password" [(ngModel)]="Password">
+                           <br>
+                           <br>
+                           <button type="submit">LOGIN</button>
+                           <p class="message"></p>
+                         </form>
+                         <form class="login-form">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#modalex">SIGN UP</button>
+                          </form>
+                      </div></div></div></div></div>
+                       <div  id="modalex"class="modal">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header" style="color:blue"><h1>Sign Up</h1></div>
+                        <div class="modal-body">
+                         <div class="form">
+                            <form #signupForm="ngForm" (ngSubmit)="adduser()">
+                              <input type="text" placeholder="Full Name" name="name" required [(ngModel)]="newuser.name">
+                              
+                           <span class="custom-dropdown">
+                         <select name="gender" [(ngModel)]="newuser.gender">
+                          <option>Gender</option>
+                          <option name="gender" value="male" [(ngModel)]="newuser.gender">Male</option>  
+                          <option name="gender" value="female" [(ngModel)]="newuser.gender">Female</option>
+                      </select>
+                       </span><br><br>
+                            <input type="text" placeholder="Email address" name="mail" [(ngModel)]="newuser.mailid" required>
+                             
+                              <input type="password" id="password" placeholder="password" name="psd" [(ngModel)]="newuser.password" required >
+                              <input type="text" placeholder="phonenumber" name="number" [(ngModel)]="newuser.phonenumber" required>
+                              
+                              
+                              <br>
+                              <button type="submit" >
+                               SIGN UP
+                             </button>
+                            </form>
+                  
+                            
+                          </div>
+                         
+                         </div></div></div></div></div>
