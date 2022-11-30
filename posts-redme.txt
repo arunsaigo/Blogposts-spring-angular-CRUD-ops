@@ -1,0 +1,204 @@
+Create & Setup Spring Boot project
+Use Spring web tool or your development tool (Spring Tool Suite, Eclipse, Intellij) to create a Spring Boot project.
+
+Then open pom.xml and add these dependencies:
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+We also need to add one more dependency for MySQL:
+
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+	<scope>runtime</scope>
+</dependency>
+Configure Spring Datasource, JPA, Hibernate
+Under src/main/resources folder, open application.properties and write these lines.
+
+spring.datasource.url= jdbc:mysql://localhost:3306/testdb?useSSL=false
+spring.datasource.username= root
+spring.datasource.password= 123456
+
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect
+
+# Hibernate ddl auto (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto= update
+spring.datasource.username & spring.datasource.password properties are the same as your database installation.
+Spring Boot uses Hibernate for JPA implementation, we configure MySQL5InnoDBDialect for MySQL
+spring.jpa.hibernate.ddl-auto is used for database initialization. We set the value to update value so that a table will be created in the database automatically corresponding to defined data model. Any change to the model will also trigger an update to the table. For production, this property should be validate.
+Define Data Model
+Our Data model is Tutorial with four fields: id, title, description, published.
+In model package, we define Tutorial class.
+
+model/Tutorial.java
+
+package com.posts.spring.datajpa.model;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tutorials")
+public class Tutorial {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	@Column(name = "title")
+	private String title;
+
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "published")
+	private boolean published;
+
+	public Tutorial() {
+
+	}
+
+	...
+}
+– @Entity annotation indicates that the class is a persistent Java class.
+– @Table annotation provides the table that maps this entity.
+– @Id annotation is for the primary key.
+– @GeneratedValue annotation is used to define generation strategy for the primary key. GenerationType.AUTO means Auto Increment field.
+– @Column annotation is used to define the column in database that maps annotated field.
+
+Create Repository Interface
+Let’s create a repository to interact with Tutorials from the database.
+In repository package, create TutorialRepository interface that extends JpaRepository.
+
+repository/TutorialRepository.java
+
+package com.posts.spring.datajpa.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.posts.spring.datajpa.model.Tutorial;
+
+public interface TutorialRepository extends JpaRepository<Tutorial, Long> {
+  List<Tutorial> findByPublished(boolean published);
+  List<Tutorial> findByTitleContaining(String title);
+}
+Now we can use JpaRepository’s methods: save(), findOne(), findById(), findAll(), count(), delete(), deleteById()… without implementing these methods.
+
+We also define custom finder methods:
+– findByPublished(): returns all Tutorials with published having value as input published.
+– findByTitleContaining(): returns all Tutorials which title contains input title.
+
+The implementation is plugged in by Spring Data JPA automatically.
+
+You can modify this Repository:
+– to work with Pagination, the instruction can be found at:
+Spring Boot Pagination & Filter example | Spring JPA, Pageable
+– or to sort/order by multiple fields with the tutorial:
+Spring Data JPA Sort/Order by multiple Columns | Spring Boot
+
+You also find way to write Unit Test for this JPA Repository at:
+Spring Boot Unit Test for JPA Repositiory with @DataJpaTest
+
+Create Spring Rest APIs Controller
+Finally, we create a controller that provides APIs for creating, retrieving, updating, deleting and finding Tutorials.
+
+controller/TutorialController.java
+
+package com.posts.spring.datajpa.controller;
+...
+
+@CrossOrigin(origins = "http://localhost:8081")
+@RestController
+@RequestMapping("/api")
+public class TutorialController {
+
+  @Autowired
+  TutorialRepository tutorialRepository;
+
+  @GetMapping("/tutorials")
+  public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
+    ...
+  }
+
+  @GetMapping("/tutorials/{id}")
+  public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
+    ...
+  }
+
+  @PostMapping("/tutorials")
+  public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
+    ...
+  }
+
+  @PutMapping("/tutorials/{id}")
+  public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
+    ...
+  }
+
+  @DeleteMapping("/tutorials/{id}")
+  public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+    ...
+  }
+
+  @DeleteMapping("/tutorials")
+  public ResponseEntity<HttpStatus> deleteAllTutorials() {
+    ...
+  }
+
+  @GetMapping("/tutorials/published")
+  public ResponseEntity<List<Tutorial>> findByPublished() {
+    ...
+  }
+}
+– @CrossOrigin is for configuring allowed origins.
+– @RestController annotation is used to define a controller and to indicate that the return value of the methods should be be bound to the web response body.
+– @RequestMapping("/api") declares that all Apis’ url in the controller will start with /api.
+– We use @Autowired to inject TutorialRepository bean to local variable.
+
+You can continue with step by step to implement this Spring Boot Server in the post:
+Spring Boot Rest CRUD API with Spring Data JPA & MySQL
+
+The Angular 12 Client in this tutorial also works well with other databases, you can find instruction in one of the posts:
+– Spring Boot + H2
+– Spring Boot + PostgreSQL
+– Spring Boot + MongoDB
+– Spring Boot + Oracle
+– Spring Boot + SQL Server
+– Spring Boot + H2
+– Spring Boot + Cassandra
+
+Run the Spring Boot Server
+Run Spring Boot application with command: mvn spring-boot:run.
+
+Angular 12 Front-end
+Overview
+angular-12-spring-boot-mysql-example-crud-front-end-overview
+– The App component is a container with router-outlet. It has navbar that links to routes paths via routerLink.
+
+– TutorialsList component gets and displays Tutorials.
+– TutorialDetails component has form for editing Tutorial’s details based on :id.
+– AddTutorial component has form for submission new Tutorial.
+
+– These Components call TutorialService methods which use Angular HTTPClient to make HTTP requests and receive responses.
+
+Technology
+Angular 12
+Angular HttpClient
+Angular Router
+Bootstrap 4
+Project Structure
+angular-12-spring-boot-mysql-example-crud-angular-client-project-structure
+– tutorial.model.ts exports the main class model: Tutorial.
+– There are 3 components: tutorials-list, tutorial-details, add-tutorial.
+– tutorial.service has methods for sending HTTP requests to the Apis.
+– app-routing.module.ts defines routes for each component.
+– app component contains router view and navigation bar.
+– app.module.ts declares Angular components and import necessary modules.
